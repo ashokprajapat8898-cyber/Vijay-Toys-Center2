@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vijay Toys Center | Wholesale & Retail Kids Superstore</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800;900&family=Fredoka:wght@500;600;700;800&family=Bungee&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    .font-toy { font-family: 'Fredoka', cursive, sans-serif; }
+    .font-bungee { font-family: 'Bungee', cursive, sans-serif; }
+    .toy-shadow { box-shadow: 0 10px 25px -5px rgba(244, 63, 94, 0.15), 0 8px 10px -6px rgba(244, 63, 94, 0.1); }
+    .card-hover:hover { transform: translateY(-7px) scale(1.02); transition: all 0.28s cubic-bezier(0.34, 1.56, 0.64, 1); }
+    .blob-bg {
+      background: radial-gradient(circle at 10% 15%, rgba(254, 240, 138, 0.6) 0%, transparent 40%),
+                  radial-gradient(circle at 90% 85%, rgba(244, 114, 182, 0.3) 0%, transparent 50%),
+                  radial-gradient(circle at 50% 50%, rgba(199, 210, 254, 0.4) 0%, transparent 60%),
+                  #fffdf7;
+    }
+  </style>
+</head>
+<body class="blob-bg text-slate-800 min-h-screen flex flex-col antialiased">
+
+  <!-- TOP STRIP -->
+  <div class="bg-gradient-to-r from-rose-500 via-purple-600 to-indigo-700 text-white text-xs font-semibold py-2 px-4 shadow-sm">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-1 text-center sm:text-left">
+      <div class="flex items-center gap-2">
+        <span class="bg-amber-300 text-slate-900 px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase">Direct Wholesale Hub</span>
+        <span><i class="fa-solid fa-location-dot mr-1"></i> Tarapet, Vijayawada | Kaleswara Rao Market</span>
+      </div>
+      <div class="flex items-center gap-4">
+        <span><i class="fa-solid fa-phone mr-1"></i> Helpline: <strong>8898001022</strong> (Ashok Kumar Navaram Prajapat)</span>
+        <span class="bg-white/20 px-2.5 py-0.5 rounded-full text-[11px]" id="currentRoleBadge">Logged in as: Customer</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- NAVBAR -->
+  <header class="bg-white/95 backdrop-blur-md sticky top-0 z-40 border-b border-rose-100 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+      
+      <!-- LOGO -->
+      <div class="flex items-center gap-2.5 cursor-pointer group" onclick="navigate('home')">
+        <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-rose-500 via-amber-400 to-indigo-500 p-0.5 shadow-md group-hover:rotate-6 transition-transform">
+          <div class="w-full h-full bg-white rounded-[14px] flex items-center justify-center text-rose-500 text-2xl font-black">
+            <i class="fa-solid fa-shapes"></i>
+          </div>
+        </div>
+        <div>
+          <span class="font-toy text-2xl font-black tracking-tight text-slate-900 block leading-none">
+            Vijay <span class="text-rose-500">Toys</span><span class="text-amber-500">.</span>
+          </span>
+          <span class="text-[9px] font-bold tracking-widest uppercase text-slate-400">Prop. Ashok Kumar Navaram Prajapat</span>
+        </div>
+      </div>
+
+      <!-- NAV -->
+      <nav class="hidden md:flex items-center space-x-7 font-bold text-sm text-slate-600">
+        <button onclick="navigate('home')" class="hover:text-rose-500 flex items-center gap-1.5"><i class="fa-solid fa-house text-xs text-rose-400"></i> Home</button>
+        <button onclick="navigate('catalog')" class="hover:text-rose-500 flex items-center gap-1.5"><i class="fa-solid fa-filter text-xs text-amber-500"></i> Category & Filter</button>
+        <button onclick="navigate('about')" class="hover:text-rose-500 flex items-center gap-1.5"><i class="fa-solid fa-store text-xs text-indigo-500"></i> Store Info</button>
+      </nav>
+
+      <!-- SWITCH ROLE & CART -->
+      <div class="flex items-center gap-3">
+        <button onclick="openLoginModal()" class="border border-slate-300 hover:border-slate-400 text-slate-700 font-bold px-3 py-1.5 rounded-xl text-xs flex items-center gap-1.5 bg-slate-50">
+          <i class="fa-solid fa-user-gear text-indigo-600"></i> <span id="navRoleText">Switch Role</span>
+        </button>
+
+        <button onclick="navigate('cart')" class="relative bg-rose-50 hover:bg-rose-100 text-rose-600 p-2.5 rounded-2xl border border-rose-200">
+          <i class="fa-solid fa-cart-shopping text-sm"></i>
+          <span id="cartCount" class="absolute -top-1 -right-1 bg-rose-500 text-white text-[10px] font-black px-1.5 py-0.2 rounded-full">0</span>
+        </button>
+
+        <button onclick="tryOpenAdmin()" class="bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-500 hover:to-amber-600 text-slate-950 font-extrabold px-3.5 py-2 rounded-xl flex items-center gap-1.5 text-xs shadow-md">
+          <i class="fa-solid fa-wand-magic-sparkles text-rose-600"></i> Admin Panel
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- IMPORTANT POLICY NOTICE BAR -->
+  <div class="bg-amber-100 border-b border-amber-200 text-amber-900 text-xs py-1.5 px-4 text-center font-bold">
+    <i class="fa-solid fa-circle-exclamation text-rose-600 mr-1"></i> Note: Sabhi wholesale aur retail toys par <strong>Strictly No Return • No Exchange</strong> policy lagu hai. Direct orders call: <strong>8898001022</strong>
+  </div>
+
+  <!-- MAIN -->
+  <main class="flex-grow max-w-7xl mx-auto w-full p-4 md:p-6 space-y-10">
+
+    <!-- 1. HOME VIEW -->
+    <section id="view-home" class="space-y-12">
+      
+      <!-- HERO BANNER -->
+      <div class="relative overflow-hidden bg-gradient-to-r from-indigo-900 via-purple-900 to-rose-900 text-white rounded-3xl p-7 md:p-12 shadow-xl flex flex-col md:flex-row items-center justify-between gap-6">
+        <div class="max-w-xl space-y-4">
+          <span class="bg-amber-300 text-slate-950 text-xs font-black px-3.5 py-1 rounded-full uppercase tracking-wider">Direct Wholesale + Retail</span>
+          <h1 class="font-toy text-4xl md:text-5xl font-black leading-tight">
+            Vijay Toys Center, <br><span class="text-amber-300">Vijayawada</span>
+          </h1>
+          <p class="text-slate-200 text-sm">Owner: <strong>Ashok Kumar Navaram Prajapat</strong> | Single piece lene par retail aur 10+ bulk pieces par transparent wholesale slabs apply hote hain.</p>
+          <div class="flex flex-wrap gap-3 pt-2">
+            <button onclick="navigate('catalog')" class="bg-amber-400 text-slate-950 font-black px-6 py-3 rounded-2xl hover:bg-amber-300 font-toy text-sm shadow-lg">
+              <i class="fa-solid fa-basket-shopping mr-1.5"></i> Shop All Toys
+            </button>
+            <button onclick="navigate('about')" class="bg-white/10 border border-white/20 text-white font-bold px-5 py-3 rounded-2xl text-xs hover:bg-white/20">
+              <i class="fa-solid fa-location-dot text-amber-300 mr-1.5"></i> Tarapet Store Location
+            </button>
+          </div>
+        </div>
+        <div class="text-center bg-white/10 backdrop-blur-md p-6 rounded-3xl border border-white/20 space-y-1">
+          <div class="text-4xl font-extrabold text-amber-300">4.4 ★</div>
+          <div class="text-xs font-bold text-slate-200">Google Verified Toy Store</div>
+          <div class="text-[11px] text-slate-300">Kaleswara Rao Market, Tarapet</div>
+        </div>
+      </div>
+
+      <!-- SHOP BY CATEGORY SECTION -->
+      <div class="space-y-6">
+        <div class="text-center space-y-1">
+          <h2 class="font-bungee text-3xl md:text-4xl text-rose-600 tracking-wide">SHOP BY CATEGORY</h2>
+          <p class="text-slate-500 font-toy text-sm">Aapke bachho ke liye sabse best toys choose karein</p>
+        </div>
+
+        <!-- ROW 1: 5 CARDS -->
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-5">
+          
+          <div class="bg-[#F6C667] rounded-3xl p-3 text-center flex flex-col items-center justify-between border-4 border-white shadow-md card-hover relative pt-5">
+            <span class="absolute -top-3 bg-emerald-700 text-white text-[10px] font-black uppercase px-3 py-0.5 rounded-full shadow">UPTO 50% OFF</span>
+            <h4 class="font-bungee text-white text-base tracking-wide mt-1">ART & CRAFT</h4>
+            <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=400&auto=format&fit=crop&q=80" class="w-28 h-28 object-cover rounded-2xl my-2 shadow">
+            <button onclick="filterFromHome('Puzzle')" class="w-full bg-[#7E22CE] text-white font-toy font-bold py-2 rounded-2xl text-xs shadow hover:opacity-90">Explore Now</button>
+          </div>
+
+          <div class="bg-[#D8B4E2] rounded-3xl p-3 text-center flex flex-col items-center justify-between border-4 border-white shadow-md card-hover relative pt-5">
+            <span class="absolute -top-3 bg-emerald-700 text-white text-[10px] font-black uppercase px-3 py-0.5 rounded-full shadow">UPTO 60% OFF</span>
+            <h4 class="font-bungee text-white text-base tracking-wide mt-1">COLLECTORS</h4>
+            <img src="https://images.unsplash.com/photo-1566577134770-3d85bb3a9cc4?w=400&auto=format&fit=crop&q=80" class="w-28 h-28 object-cover rounded-2xl my-2 shadow">
+            <button onclick="filterFromHome('Tactical')" class="w-full bg-[#0D9488] text-white font-toy font-bold py-2 rounded-2xl text-xs shadow hover:opacity-90">Explore Now</button>
+          </div>
+
+          <div class="bg-[#6EE7B7] rounded-3xl p-3 text-center flex flex-col items-center justify-between border-4 border-white shadow-md card-hover relative pt-5">
+            <span class="absolute -top-3 bg-emerald-700 text-white text-[10px] font-black uppercase px-3 py-0.5 rounded-full shadow">UPTO 55% OFF</span>
+            <h4 class="font-bungee text-white text-sm tracking-wide mt-1">CONSTRUCTION</h4>
+            <img src="https://images.unsplash.com/photo-1587654780291-39c9404d746b?w=400&auto=format&fit=crop&q=80" class="w-28 h-28 object-cover rounded-2xl my-2 shadow">
+            <button onclick="filterFromHome('Puzzle')" class="w-full bg-[#EA580C] text-white font-toy font-bold py-2 rounded-2xl text-xs shadow hover:opacity-90">Explore Now</button>
+          </div>
+
+          <div class="bg-[#93C5FD] rounded-3xl p-3 text-center flex flex-col items-center justify-between border-4 border-white shadow-md card-hover relative pt-5">
+            <span class="absolute -top-3 bg-emerald-700 text-white text-[10px] font-black uppercase px-3 py-0.5 rounded-full shadow">UPTO 60% OFF</span>
+            <h4 class="font-bungee text-white text-sm tracking-wide mt-1">GAMES & PUZZLE</h4>
+            <img src="https://images.unsplash.com/photo-1610890716171-6b1bb98ffd09?w=400&auto=format&fit=crop&q=80" class="w-28 h-28 object-cover rounded-2xl my-2 shadow">
+            <button onclick="filterFromHome('Puzzle')" class="w-full bg-[#2563EB] text-white font-toy font-bold py-2 rounded-2xl text-xs shadow hover:opacity-90">Explore Now</button>
+          </div>
+
+          <div class="bg-[#BEF264] rounded-3xl p-3 text-center flex flex-col items-center justify-between border-4 border-white shadow-md card-hover relative pt-5">
+            <span class="absolute -top-3 bg-emerald-700 text-white text-[10px] font-black uppercase px-3 py-0.5 rounded-full shadow">UPTO 50% OFF</span>
+            <h4 class="font-bungee text-slate-800 text-base tracking-wide mt-1">OUTDOOR TOYS</h4>
+            <img src="https://images.unsplash.com/photo-1534447677768-be436bb09401?w=400&auto=format&fit=crop&q=80" class="w-28 h-28 object-cover rounded-2xl my-2 shadow">
+            <button onclick="filterFromHome('Guns')" class="w-full bg-[#15803D] text-white font-toy font-bold py-2 rounded-2xl text-xs shadow hover:opacity-90">Explore Now</button>
+          </div>
+
+        </div>
+
+        <!-- ROW 2: 4 CARDS -->
+        <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
+          
+          <div class="bg-[#FBCFE8] rounded-3xl p-3.5 text-center flex flex-col items-center justify-between border-4 border-white shadow-md card-hover relative pt-5">
+            <span class="absolute -top-3 bg-emerald-700 text-white text-[10px] font-black uppercase px-3 py-0.5 rounded-full shadow">UPTO 30% OFF</span>
+            <h4 class="font-bungee text-[#BE185D] text-base tracking-wide mt-1">PREMIUM DOLLS</h4>
+            <img src="https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?w=400&auto=format&fit=crop&q=80" class="w-32 h-32 object-cover rounded-2xl my-2 shadow">
+            <button onclick="filterFromHome('Dolls')" class="w-full bg-[#E11D48] text-white font-toy font-bold py-2 rounded-2xl text-xs shadow hover:opacity-90">Explore Now</button>
+          </div>
+
+          <div class="bg-[#FDBA74] rounded-3xl p-3.5 text-center flex flex-col items-center justify-between border-4 border-white shadow-md card-hover relative pt-5">
+            <span class="absolute -top-3 bg-emerald-700 text-white text-[10px] font-black uppercase px-3 py-0.5 rounded-full shadow">UPTO 50% OFF</span>
+            <h4 class="font-bungee text-white text-base tracking-wide mt-1">SOFT TOYS</h4>
+            <img src="https://images.unsplash.com/photo-1559454403-b8fb88521f11?w=400&auto=format&fit=crop&q=80" class="w-32 h-32 object-cover rounded-2xl my-2 shadow">
+            <button onclick="filterFromHome('Battery')" class="w-full bg-[#C2410C] text-white font-toy font-bold py-2 rounded-2xl text-xs shadow hover:opacity-90">Explore Now</button>
+          </div>
+
+          <div class="bg-[#BAE6FD] rounded-3xl p-3.5 text-center flex flex-col items-center justify-between border-4 border-white shadow-md card-hover relative pt-5">
+            <span class="absolute -top-3 bg-emerald-700 text-white text-[10px] font-black uppercase px-3 py-0.5 rounded-full shadow">UPTO 70% OFF</span>
+            <h4 class="font-bungee text-[#0369A1] text-base tracking-wide mt-1">FLYING & DRONES</h4>
+            <img src="https://images.unsplash.com/photo-1508614589041-895b88991e3e?w=400&auto=format&fit=crop&q=80" class="w-32 h-32 object-cover rounded-2xl my-2 shadow">
+            <button onclick="filterFromHome('Flying')" class="w-full bg-[#1D4ED8] text-white font-toy font-bold py-2 rounded-2xl text-xs shadow hover:opacity-90">Explore Now</button>
+          </div>
+
+          <div class="bg-[#A7F3D0] rounded-3xl p-3.5 text-center flex flex-col items-center justify-between border-4 border-white shadow-md card-hover relative pt-5">
+            <span class="absolute -top-3 bg-emerald-700 text-white text-[10px] font-black uppercase px-3 py-0.5 rounded-full shadow">UPTO 50% OFF</span>
+            <h4 class="font-bungee text-[#047857] text-base tracking-wide mt-1">VEHICLES & RC</h4>
+            <img src="https://images.unsplash.com/photo-1594787318286-3d835c1d207f?w=400&auto=format&fit=crop&q=80" class="w-32 h-32 object-cover rounded-2xl my-2 shadow">
+            <button onclick="filterFromHome('Racing')" class="w-full bg-[#D97706] text-white font-toy font-bold py-2 rounded-2xl text-xs shadow hover:opacity-90">Explore Now</button>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- SPOTLIGHT PRODUCTS -->
+      <div class="space-y-4">
+        <div class="flex justify-between items-center">
+          <h2 class="font-toy text-2xl font-black text-slate-900">Trending Kids Toys</h2>
+          <button onclick="navigate('catalog')" class="text-xs font-bold text-rose-600 hover:underline">View All Catalog</button>
+        </div>
+        <div id="homeFeaturedGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5"></div>
+      </div>
+
+    </section>
+
+    <!-- 2. CATALOG & FILTERS -->
+    <section id="view-catalog" class="hidden space-y-6">
+      <div class="bg-white p-6 rounded-3xl border border-rose-100 shadow-sm flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+        <div>
+          <span class="text-rose-500 font-extrabold text-xs uppercase tracking-wider">Inventory Filter</span>
+          <h2 class="font-toy text-3xl font-black text-slate-900">Toys Catalog & Bulk Slabs</h2>
+        </div>
+        <div class="text-xs font-bold text-slate-600 bg-slate-50 px-3 py-2 rounded-xl border">
+          Showing: <span id="productCountBadge" class="text-rose-600 font-black">0</span> Items
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+        <div class="lg:col-span-1 bg-white p-5 rounded-3xl border border-slate-200 shadow-sm space-y-5 h-fit sticky top-20">
+          <div class="flex justify-between items-center border-b pb-2">
+            <h3 class="font-toy font-black text-slate-900 text-base flex items-center gap-2">
+              <i class="fa-solid fa-sliders text-rose-500"></i> Filters
+            </h3>
+            <button onclick="resetFilters()" class="text-[11px] font-bold text-rose-600 hover:underline">Reset</button>
+          </div>
+
+          <div class="space-y-1.5">
+            <label class="block text-[11px] font-black text-slate-600 uppercase">Gender</label>
+            <div class="grid grid-cols-2 gap-1 text-xs">
+              <button onclick="setFilter('gender', 'All')" class="filter-btn-gender px-2 py-1 rounded-lg border font-bold bg-rose-500 text-white" data-val="All">All</button>
+              <button onclick="setFilter('gender', 'Boys')" class="filter-btn-gender px-2 py-1 rounded-lg border font-bold bg-slate-50 text-slate-700" data-val="Boys">Boys</button>
+              <button onclick="setFilter('gender', 'Girls')" class="filter-btn-gender px-2 py-1 rounded-lg border font-bold bg-slate-50 text-slate-700" data-val="Girls">Girls</button>
+              <button onclick="setFilter('gender', 'Unisex')" class="filter-btn-gender px-2 py-1 rounded-lg border font-bold bg-slate-50 text-slate-700" data-val="Unisex">Unisex</button>
+            </div>
+          </div>
+
+          <div class="space-y-1">
+            <label class="block text-[11px] font-black text-slate-600 uppercase">Category</label>
+            <div class="space-y-1 text-xs">
+              <label class="flex items-center gap-2 p-1.5 rounded-lg hover:bg-slate-50 cursor-pointer"><input type="radio" name="catFilter" value="All" checked onchange="setFilter('cat', 'All')"> All</label>
+              <label class="flex items-center gap-2 p-1.5 rounded-lg hover:bg-slate-50 cursor-pointer"><input type="radio" name="catFilter" value="Racing" onchange="setFilter('cat', 'Racing')"> Racing & RC</label>
+              <label class="flex items-center gap-2 p-1.5 rounded-lg hover:bg-slate-50 cursor-pointer"><input type="radio" name="catFilter" value="Guns" onchange="setFilter('cat', 'Guns')"> Guns & Blasters</label>
+              <label class="flex items-center gap-2 p-1.5 rounded-lg hover:bg-slate-50 cursor-pointer"><input type="radio" name="catFilter" value="Dolls" onchange="setFilter('cat', 'Dolls')"> Dolls & Play</label>
+              <label class="flex items-center gap-2 p-1.5 rounded-lg hover:bg-slate-50 cursor-pointer"><input type="radio" name="catFilter" value="Puzzle" onchange="setFilter('cat', 'Puzzle')"> Puzzles & STEM</label>
+              <label class="flex items-center gap-2 p-1.5 rounded-lg hover:bg-slate-50 cursor-pointer"><input type="radio" name="catFilter" value="Battery" onchange="setFilter('cat', 'Battery')"> Battery Operated</label>
+              <label class="flex items-center gap-2 p-1.5 rounded-lg hover:bg-slate-50 cursor-pointer"><input type="radio" name="catFilter" value="Flying" onchange="setFilter('cat', 'Flying')"> Flying Toys</label>
+              <label class="flex items-center gap-2 p-1.5 rounded-lg hover:bg-slate-50 cursor-pointer"><input type="radio" name="catFilter" value="Tactical" onchange="setFilter('cat', 'Tactical')"> Tactical</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="lg:col-span-3">
+          <div id="catalogGrid" class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5"></div>
+          <div id="noProductsFound" class="hidden text-center py-16 bg-white rounded-3xl border border-dashed text-slate-400">
+            <p class="font-bold">Chune hue filters me koi toy nahi mila!</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. CART -->
+    <section id="view-cart" class="hidden space-y-6">
+      <h2 class="font-toy text-3xl font-black text-slate-900">Your Cart & Bulk Billing</h2>
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div class="lg:col-span-2 bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-4">
+          <div id="cartItemsList" class="space-y-4"></div>
+          <div id="emptyCartNotice" class="text-center py-16 text-slate-400 hidden">
+            <p class="font-bold text-slate-600">Aapka Cart khali hai!</p>
+          </div>
+        </div>
+
+        <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-4 h-fit">
+          <h3 class="font-toy text-xl font-bold border-b pb-2">Bill Summary</h3>
+          <div class="space-y-2 text-xs">
+            <div class="flex justify-between"><span>Retail Value:</span><span id="summarySubtotal" class="font-bold">₹0</span></div>
+            <div class="flex justify-between text-emerald-600 font-bold"><span>Wholesale Savings:</span><span id="summaryDiscount">-₹0</span></div>
+            <div class="flex justify-between"><span>Delivery / Transport:</span><span id="summaryShipping" class="font-bold">₹0</span></div>
+            <div class="border-t pt-2 flex justify-between font-bold text-base"><span>Payable Amount:</span><span id="summaryTotal" class="text-rose-600 font-black">₹0</span></div>
+          </div>
+
+          <select id="shippingType" onchange="calculateCart()" class="w-full border rounded-xl p-2 text-xs bg-slate-50 font-medium">
+            <option value="courier">Standard Courier (Single Pieces)</option>
+            <option value="transport">Freight Transport / Bilti (Bulk Cartons)</option>
+            <option value="pickup">Store Pickup (Vijayawada Tarapet - FREE)</option>
+          </select>
+
+          <!-- POLICY ALERT IN CART -->
+          <div class="bg-red-50 border border-red-200 text-red-700 p-2.5 rounded-xl text-[11px] font-bold text-center">
+            <i class="fa-solid fa-triangle-exclamation mr-1"></i> Order Policy: Strictly <strong>No Return & No Exchange</strong> once dispatched.
+          </div>
+
+          <button onclick="placeOrder()" class="w-full bg-emerald-600 text-white font-bold py-3 rounded-2xl shadow font-toy text-sm hover:bg-emerald-700">
+            Pay & Confirm Order
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. ABOUT -->
+    <section id="view-about" class="hidden max-w-2xl mx-auto bg-white p-7 rounded-3xl border border-rose-100 shadow-sm space-y-4">
+      <div class="border-b pb-3 flex items-center gap-3">
+        <div class="w-12 h-12 rounded-2xl bg-amber-400 flex items-center justify-center text-slate-900 text-2xl font-bold">
+          <i class="fa-solid fa-store"></i>
+        </div>
+        <div>
+          <h2 class="font-toy text-2xl font-black text-slate-900">Vijay Toys Center</h2>
+          <p class="text-xs text-rose-600 font-bold">Proprietor: Ashok Kumar Navaram Prajapat</p>
+        </div>
+      </div>
+      <div class="text-xs text-slate-700 space-y-3 leading-relaxed">
+        <p><i class="fa-solid fa-location-dot text-indigo-600 mr-1.5"></i> <strong>Address:</strong> 11-40-2, Bhavannarayan Street, Opposite Chitturi Complex, Kaleswara Rao Market, Tarapet, Vijayawada - 520001</p>
+        <p><i class="fa-solid fa-phone text-indigo-600 mr-1.5"></i> <strong>Direct Helpline:</strong> 8898001022</p>
+        <p><i class="fa-solid fa-user-tie text-indigo-600 mr-1.5"></i> <strong>Contact Person:</strong> Ashok Kumar Navaram Prajapat</p>
+        <p><i class="fa-solid fa-clock text-indigo-600 mr-1.5"></i> <strong>Timings:</strong> Open Daily (Closes 10:00 PM)</p>
+        <p class="bg-red-50 p-2 rounded-xl border border-red-200 text-red-700 font-bold"><i class="fa-solid fa-ban text-red-500 mr-1.5"></i> Store Policy: All toy sales are final. We strictly follow a No Return & No Exchange policy.</p>
+      </div>
+    </section>
+
+    <!-- 5. ADMIN CENTER -->
+    <section id="view-admin" class="hidden space-y-6">
+      <div class="bg-indigo-950 text-white p-6 rounded-3xl shadow flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+        <div>
+          <span class="bg-amber-400 text-slate-950 text-[10px] font-black px-2 py-0.5 rounded-full">Owner Control</span>
+          <h2 class="font-toy text-3xl font-black mt-1">Admin Inventory Dashboard</h2>
+          <p class="text-xs text-slate-300">Welcome, Ashok Kumar Navaram Prajapat | Manage toys catalog & wholesale slabs.</p>
+        </div>
+        
+        <div class="flex gap-2 bg-white/10 p-1.5 rounded-2xl border border-white/20 text-xs">
+          <button onclick="switchAdminTab('ai')" id="tabBtnAi" class="bg-amber-400 text-slate-950 font-black px-3.5 py-1.5 rounded-xl">
+            <i class="fa-solid fa-wand-magic-sparkles mr-1"></i> AI Auto Lister
+          </button>
+          <button onclick="switchAdminTab('manage')" id="tabBtnManage" class="text-white hover:text-amber-300 font-bold px-3.5 py-1.5 rounded-xl">
+            <i class="fa-solid fa-boxes-stacked mr-1"></i> Manage Products (<span id="adminTotalCount">0</span>)
+          </button>
+        </div>
+      </div>
+
+      <!-- TAB 1: AI NEW LISTER WITH PHOTO UPLOAD -->
+      <div id="adminTabAi" class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div class="bg-white p-5 rounded-3xl border space-y-3">
+          <h3 class="font-toy font-bold text-sm text-slate-800 flex items-center gap-1.5">
+            <i class="fa-solid fa-camera text-rose-500"></i> Photo & Base Details
+          </h3>
+
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Toy Photo Upload (Camera / Gallery)</label>
+            <input type="file" id="aiPhotoFileInput" accept="image/*" onchange="handleAiFileUpload(event)" class="w-full text-xs text-slate-500 file:mr-2 file:py-1.5 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-rose-50 file:text-rose-700 hover:file:bg-rose-100 cursor-pointer">
+          </div>
+
+          <div class="flex items-center gap-3 bg-slate-50 p-2.5 rounded-2xl border border-slate-200">
+            <img id="aiSelectedImagePreview" src="https://images.unsplash.com/photo-1594787318286-3d835c1d207f?w=600&auto=format&fit=crop&q=80" class="w-16 h-16 rounded-xl object-cover border">
+            <div class="text-[11px] text-slate-500">
+              <span class="font-bold text-slate-700 block">Photo Status:</span>
+              <span id="aiPhotoStatus">Ready to list</span>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Or Pick Demo Model</label>
+            <select id="aiToyType" onchange="syncAiDemoImage()" class="w-full border rounded-xl p-2 text-xs bg-slate-50">
+              <option value="rc_crawler">4x4 Extreme RC Rock Crawler (Racing)</option>
+              <option value="gel_blaster">Tactical Gel Blaster Sniper (Guns)</option>
+              <option value="doll_house">Musical Doll Villa Pretend Set (Dolls)</option>
+              <option value="drone_heli">Gesture Sensor Flying Helicopter (Flying)</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Single Piece Retail Price (₹)</label>
+            <input id="aiPrice" type="number" value="799" class="w-full border rounded-xl p-2 text-xs bg-slate-50 font-bold">
+          </div>
+
+          <button onclick="runAiListing()" class="w-full bg-rose-500 hover:bg-rose-600 text-white font-bold py-2.5 rounded-xl text-xs font-toy">
+            <i class="fa-solid fa-wand-magic-sparkles mr-1"></i> Auto Generate via AI
+          </button>
+        </div>
+
+        <div class="lg:col-span-2 bg-white p-5 rounded-3xl border">
+          <div id="aiPreviewBox" class="bg-slate-50 border-2 border-dashed rounded-2xl p-8 text-center text-xs text-slate-400">
+            Photo upload karein aur price daal kar <strong>Auto Generate via AI</strong> dabayein.
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 2: MANAGE & EDIT EXISTING PRODUCTS -->
+      <div id="adminTabManage" class="hidden bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-4">
+        <div class="flex justify-between items-center border-b pb-3">
+          <div>
+            <h3 class="font-toy text-xl font-black text-slate-900">Current Live Products</h3>
+            <p class="text-xs text-slate-400">Photo badalna ho ya price/title update karna ho, Edit dabayein.</p>
+          </div>
+          <button onclick="switchAdminTab('ai')" class="bg-rose-500 text-white text-xs font-bold px-3 py-1.5 rounded-xl font-toy">
+            + Add New
+          </button>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs border-collapse">
+            <thead>
+              <tr class="bg-slate-100 text-slate-700 uppercase font-black text-[10px]">
+                <th class="p-3 rounded-l-xl">Photo & Title</th>
+                <th class="p-3">Category / Age</th>
+                <th class="p-3">Retail Price</th>
+                <th class="p-3">Wholesale Slab</th>
+                <th class="p-3 rounded-r-xl text-right">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="adminProductsTableBody" class="divide-y divide-slate-100 font-medium">
+              <!-- Populated by JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="mt-12">
+    <div class="bg-[#D90429] text-white py-3.5 px-4 text-center font-black text-xs md:text-sm tracking-wider uppercase">
+      <span><i class="fa-solid fa-ban mr-1.5"></i> STRICT POLICY: NO RETURN • NO EXCHANGE ON TOYS & ELECTRONICS • WHOLESALE & RETAIL FINAL SALE</span>
+    </div>
+
+    <!-- MAIN FOOTER -->
+    <div class="bg-white border-t border-slate-200 py-10 px-4 md:px-8">
+      <div class="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-5 gap-8 text-xs text-slate-500">
+        <div>
+          <h4 class="font-bold text-slate-800 text-sm mb-3">Most Loved Categories</h4>
+          <ul class="space-y-1.5">
+            <li>RC Vehicles & Cars</li>
+            <li>STEM & Wooden Toys</li>
+            <li>Cooking Sets & Dolls</li>
+            <li>Air Blaster Foam Guns</li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-bold text-slate-800 text-sm mb-3">Bulk Wholesale</h4>
+          <ul class="space-y-1.5">
+            <li>Bilti & Carton Orders</li>
+            <li>Reseller Slabs</li>
+            <li>School Event Supplies</li>
+            <li>Transport Booking</li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-bold text-slate-800 text-sm mb-3">About Vijay Toys</h4>
+          <ul class="space-y-1.5">
+            <li>Proprietor: Ashok Kumar Navaram Prajapat</li>
+            <li>Tarapet Store, Vijayawada</li>
+            <li>Store Locator</li>
+            <li>Direct Wholesale Rates</li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-bold text-slate-800 text-sm mb-3">Support & Policies</h4>
+          <ul class="space-y-1.5">
+            <li>Call: 8898001022</li>
+            <li>Track Bilti Transport</li>
+            <li class="text-rose-600 font-bold">Strictly No Return / Exchange</li>
+            <li>Dispatch Verification Guide</li>
+          </ul>
+        </div>
+        <div class="col-span-2 md:col-span-1">
+          <h4 class="font-bold text-slate-800 text-sm mb-3">Get Wholesale Alerts</h4>
+          <p class="text-[11px] text-slate-400 mb-2">Carton discount updates WhatsApp par pane ke liye judiye:</p>
+          <div class="flex">
+            <input type="text" placeholder="Your Phone Number" class="w-full border rounded-l-xl p-2 text-xs focus:outline-none">
+            <button class="bg-rose-600 text-white px-3 rounded-r-xl font-bold"><i class="fa-solid fa-arrow-right"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- MODAL: ROLE SWITCHER -->
+  <div id="loginModal" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-sm w-full p-6 shadow-2xl border border-rose-100 space-y-4">
+      <div class="flex justify-between items-center border-b pb-3">
+        <h3 class="font-toy text-xl font-black text-slate-900">User Login & Role</h3>
+        <button onclick="closeLoginModal()" class="text-slate-400 hover:text-rose-500 text-lg"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <div class="space-y-3">
+        <div onclick="selectRole('customer')" class="p-3.5 rounded-2xl border-2 hover:border-indigo-600 cursor-pointer flex items-center justify-between bg-slate-50 transition-all" id="roleOptCustomer">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-indigo-100 text-indigo-700 flex items-center justify-center font-bold">
+              <i class="fa-solid fa-user"></i>
+            </div>
+            <div>
+              <div class="font-bold text-xs text-slate-800">Customer User</div>
+              <div class="text-[10px] text-slate-400">Can browse, cart & checkout</div>
+            </div>
+          </div>
+          <span class="text-emerald-600 font-bold text-xs hidden" id="checkCustomer"><i class="fa-solid fa-circle-check text-base"></i></span>
+        </div>
+
+        <div onclick="selectRole('admin')" class="p-3.5 rounded-2xl border-2 hover:border-amber-500 cursor-pointer flex items-center justify-between bg-slate-50 transition-all" id="roleOptAdmin">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center font-bold">
+              <i class="fa-solid fa-user-shield"></i>
+            </div>
+            <div>
+              <div class="font-bold text-xs text-slate-800">Ashok Kumar (Admin)</div>
+              <div class="text-[10px] text-slate-400">Full Edit, Photo Upload & Delete</div>
+            </div>
+          </div>
+          <span class="text-emerald-600 font-bold text-xs hidden" id="checkAdmin"><i class="fa-solid fa-circle-check text-base"></i></span>
+        </div>
+      </div>
+
+      <button onclick="closeLoginModal()" class="w-full bg-slate-900 text-white font-bold py-2.5 rounded-xl text-xs">
+        Done
+      </button>
+    </div>
+  </div>
+
+  <!-- MODAL: EDIT PRODUCT DETAILS & PHOTO -->
+  <div id="editProductModal" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-lg w-full p-6 shadow-2xl border border-rose-100 space-y-4 max-h-[90vh] overflow-y-auto">
+      <div class="flex justify-between items-center border-b pb-3">
+        <h3 class="font-toy text-xl font-black text-slate-900">Edit Toy Details & Photo</h3>
+        <button onclick="closeEditModal()" class="text-slate-400 hover:text-rose-500 text-lg"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <input type="hidden" id="editProdId">
+
+      <div class="space-y-3 text-xs">
+        <div class="bg-slate-50 p-3 rounded-2xl border space-y-2">
+          <label class="block font-bold text-slate-700">Toy Photo (Upload New or Update URL)</label>
+          <div class="flex items-center gap-3">
+            <img id="editPhotoPreview" class="w-16 h-16 rounded-xl object-cover border bg-white">
+            <div class="flex-grow space-y-1.5">
+              <input type="file" id="editPhotoFileInput" accept="image/*" onchange="handleEditPhotoUpload(event)" class="w-full text-[11px] text-slate-500 file:mr-2 file:py-1 file:px-2.5 file:rounded-lg file:border-0 file:text-[10px] file:font-bold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100 cursor-pointer">
+              <input id="editPhotoUrl" onchange="syncEditPhotoFromUrl()" placeholder="Or paste image URL" class="w-full border rounded-lg p-1.5 text-[11px] bg-white">
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <label class="block font-bold text-slate-600 mb-1">Product Title</label>
+          <input id="editTitle" class="w-full border rounded-xl p-2 font-bold text-slate-800">
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block font-bold text-slate-600 mb-1">Category</label>
+            <select id="editCategory" class="w-full border rounded-xl p-2">
+              <option value="Racing">Racing</option>
+              <option value="Guns">Guns</option>
+              <option value="Dolls">Dolls</option>
+              <option value="Puzzle">Puzzle</option>
+              <option value="Battery">Battery</option>
+              <option value="Flying">Flying</option>
+              <option value="Tactical">Tactical</option>
+            </select>
+          </div>
+          <div>
+            <label class="block font-bold text-slate-600 mb-1">Gender</label>
+            <select id="editGender" class="w-full border rounded-xl p-2">
+              <option value="Boys">Boys</option>
+              <option value="Girls">Girls</option>
+              <option value="Unisex">Unisex</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="block font-bold text-slate-600 mb-1">Retail Price (₹)</label>
+            <input id="editRetail" type="number" class="w-full border rounded-xl p-2 font-bold">
+          </div>
+          <div>
+            <label class="block font-bold text-slate-600 mb-1">Wholesale (₹/pc)</label>
+            <input id="editWholesale" type="number" class="w-full border rounded-xl p-2 font-bold text-rose-600">
+          </div>
+          <div>
+            <label class="block font-bold text-slate-600 mb-1">Min Bulk Qty</label>
+            <input id="editMinQty" type="number" class="w-full border rounded-xl p-2 font-bold">
+          </div>
+        </div>
+
+        <div>
+          <label class="block font-bold text-slate-600 mb-1">Description</label>
+          <textarea id="editDesc" rows="2" class="w-full border rounded-xl p-2 text-xs"></textarea>
+        </div>
+      </div>
+
+      <div class="flex gap-2 pt-2">
+        <button onclick="saveProductEdit()" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2.5 rounded-xl text-xs font-toy">
+          Save Changes
+        </button>
+        <button onclick="closeEditModal()" class="bg-slate-100 text-slate-600 font-bold px-4 py-2.5 rounded-xl text-xs">
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let currentUserRole = 'customer';
+    let currentUploadedAiImage = "https://images.unsplash.com/photo-1594787318286-3d835c1d207f?w=600&auto=format&fit=crop&q=80";
+
+    let products = [
+      { id: 1, title: "2.4GHz High-Speed 4x4 Off-Road Monster Truck", cat: "Racing", gender: "Boys", age: "6-8", retailPrice: 999, wholesalePrice: 620, bulkMinQty: 10, desc: "Rugged suspension, rechargeable battery and rubber high-grip tires.", image: "https://images.unsplash.com/photo-1594787318286-3d835c1d207f?w=600&auto=format&fit=crop&q=80" },
+      { id: 2, title: "Smoke Spraying Drifter Racing Car with LED", cat: "Racing", gender: "Boys", age: "6-8", retailPrice: 849, wholesalePrice: 530, bulkMinQty: 10, desc: "Exhaust smoke mist effect, fast drifting 360-degree wheels.", image: "https://images.unsplash.com/photo-1581235720704-06d3acfcb36f?w=600&auto=format&fit=crop&q=80" },
+      { id: 3, title: "Manual Shotgun Foam Dart Blaster (20 Darts)", cat: "Guns", gender: "Boys", age: "6-8", retailPrice: 499, wholesalePrice: 310, bulkMinQty: 12, desc: "Safe soft EVA bullets with pump-action reload and target cans.", image: "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=600&auto=format&fit=crop&q=80" },
+      { id: 4, title: "Deluxe Cooking Chef Kitchen Set with Light", cat: "Dolls", gender: "Girls", age: "3-5", retailPrice: 799, wholesalePrice: 490, bulkMinQty: 10, desc: "Interactive boiling sound effects, mini utensils and realistic cuttable veggies.", image: "https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?w=600&auto=format&fit=crop&q=80" },
+      { id: 5, title: "150-Pcs STEM Magnetic Architectural 3D Blocks", cat: "Puzzle", gender: "Unisex", age: "3-5", retailPrice: 649, wholesalePrice: 399, bulkMinQty: 12, desc: "Translucent magnetic building tiles for spatial reasoning & creativity.", image: "https://images.unsplash.com/photo-1587654780291-39c9404d746b?w=600&auto=format&fit=crop&q=80" }
+    ];
+
+    let currentFilters = { gender: 'All', cat: 'All', age: 'All' };
+    let cart = [];
+
+    function handleAiFileUpload(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        currentUploadedAiImage = e.target.result;
+        document.getElementById('aiSelectedImagePreview').src = currentUploadedAiImage;
+        document.getElementById('aiPhotoStatus').innerText = "Uploaded from device!";
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function syncAiDemoImage() {
+      const type = document.getElementById('aiToyType').value;
+      let url = "https://images.unsplash.com/photo-1594787318286-3d835c1d207f?w=600&auto=format&fit=crop&q=80";
+      if (type === 'gel_blaster') url = "https://images.unsplash.com/photo-1595590424283-b8f17842773f?w=600&auto=format&fit=crop&q=80";
+      if (type === 'doll_house') url = "https://images.unsplash.com/photo-1585366119957-e9730b6d0f60?w=600&auto=format&fit=crop&q=80";
+      if (type === 'drone_heli') url = "https://images.unsplash.com/photo-1508614589041-895b88991e3e?w=600&auto=format&fit=crop&q=80";
+      currentUploadedAiImage = url;
+      document.getElementById('aiSelectedImagePreview').src = url;
+      document.getElementById('aiPhotoStatus').innerText = "Demo Photo selected";
+    }
+
+    function handleEditPhotoUpload(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const base64 = e.target.result;
+        document.getElementById('editPhotoPreview').src = base64;
+        document.getElementById('editPhotoUrl').value = base64;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function syncEditPhotoFromUrl() {
+      const url = document.getElementById('editPhotoUrl').value;
+      if (url) document.getElementById('editPhotoPreview').src = url;
+    }
+
+    function openLoginModal() {
+      document.getElementById('loginModal').classList.remove('hidden');
+      updateModalUi();
+    }
+    function closeLoginModal() {
+      document.getElementById('loginModal').classList.add('hidden');
+    }
+    function selectRole(role) {
+      currentUserRole = role;
+      updateModalUi();
+      applyRoleUi();
+    }
+    function updateModalUi() {
+      const isCust = currentUserRole === 'customer';
+      document.getElementById('checkCustomer').classList.toggle('hidden', !isCust);
+      document.getElementById('checkAdmin').classList.toggle('hidden', isCust);
+      document.getElementById('roleOptCustomer').className = isCust ? "p-3.5 rounded-2xl border-2 border-indigo-600 bg-indigo-50/50 cursor-pointer flex items-center justify-between" : "p-3.5 rounded-2xl border border-slate-200 bg-slate-50 cursor-pointer flex items-center justify-between";
+      document.getElementById('roleOptAdmin').className = !isCust ? "p-3.5 rounded-2xl border-2 border-amber-500 bg-amber-50/50 cursor-pointer flex items-center justify-between" : "p-3.5 rounded-2xl border border-slate-200 bg-slate-50 cursor-pointer flex items-center justify-between";
+    }
+    function applyRoleUi() {
+      const isAdm = currentUserRole === 'admin';
+      document.getElementById('currentRoleBadge').innerText = `Logged in as: ${isAdm ? 'Ashok Kumar (Admin)' : 'Customer'}`;
+      document.getElementById('navRoleText').innerText = isAdm ? 'Admin Mode' : 'Customer';
+      if (!isAdm) {
+        const adminView = document.getElementById('view-admin');
+        if (!adminView.classList.contains('hidden')) navigate('home');
+      }
+    }
+
+    function tryOpenAdmin() {
+      if (currentUserRole !== 'admin') {
+        alert("Aap abhi Customer mode me hain. Admin features ke liye 'Switch Role' me jakar 'Ashok Kumar (Admin)' chunein!");
+        openLoginModal();
+        return;
+      }
+      navigate('admin');
+      switchAdminTab('manage');
+    }
+
+    function navigate(view) {
+      ['home', 'catalog', 'cart', 'about', 'admin'].forEach(v => {
+        document.getElementById(`view-${v}`).classList.add('hidden');
+      });
+      document.getElementById(`view-${view}`).classList.remove('hidden');
+      if (view === 'home') renderHome();
+      if (view === 'catalog') renderCatalog();
+      if (view === 'cart') renderCart();
+      if (view === 'admin') renderAdminTable();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function filterFromHome(catName) {
+      currentFilters.cat = catName;
+      navigate('catalog');
+      const radio = document.querySelector(`input[name="catFilter"][value="${catName}"]`);
+      if (radio) radio.checked = true;
+      renderCatalog();
+    }
+
+    function switchAdminTab(tab) {
+      const isAi = tab === 'ai';
+      document.getElementById('adminTabAi').classList.toggle('hidden', !isAi);
+      document.getElementById('adminTabManage').classList.toggle('hidden', isAi);
+      document.getElementById('tabBtnAi').className = isAi ? "bg-amber-400 text-slate-950 font-black px-3.5 py-1.5 rounded-xl" : "text-white hover:text-amber-300 font-bold px-3.5 py-1.5 rounded-xl";
+      document.getElementById('tabBtnManage').className = !isAi ? "bg-amber-400 text-slate-950 font-black px-3.5 py-1.5 rounded-xl" : "text-white hover:text-amber-300 font-bold px-3.5 py-1.5 rounded-xl";
+      if (!isAi) renderAdminTable();
+    }
+
+    function renderAdminTable() {
+      document.getElementById('adminTotalCount').innerText = products.length;
+      const tbody = document.getElementById('adminProductsTableBody');
+      tbody.innerHTML = products.map(p => `
+        <tr class="hover:bg-slate-50 transition-colors">
+          <td class="p-3 flex items-center gap-2.5">
+            <img src="${p.image}" class="w-11 h-11 rounded-xl object-cover border">
+            <div>
+              <div class="font-bold text-slate-800">${p.title}</div>
+              <div class="text-[10px] text-slate-400">ID: #${p.id}</div>
+            </div>
+          </td>
+          <td class="p-3">
+            <span class="bg-indigo-50 text-indigo-700 px-2 py-0.5 rounded font-bold text-[10px]">${p.cat}</span>
+            <span class="text-slate-400 text-[10px] ml-1">${p.gender} (${p.age})</span>
+          </td>
+          <td class="p-3 font-extrabold text-slate-900">₹${p.retailPrice}</td>
+          <td class="p-3 text-rose-600 font-bold">₹${p.wholesalePrice} <span class="text-slate-400 text-[10px]">(${p.bulkMinQty}+ pcs)</span></td>
+          <td class="p-3 text-right space-x-1.5">
+            <button onclick="openEditModal(${p.id})" class="bg-indigo-50 hover:bg-indigo-100 text-indigo-700 px-2.5 py-1.5 rounded-lg font-bold text-[11px]">
+              <i class="fa-solid fa-pen-to-square mr-1"></i> Edit & Photo
+            </button>
+            <button onclick="deleteProduct(${p.id})" class="bg-red-50 hover:bg-red-100 text-red-600 px-2.5 py-1.5 rounded-lg font-bold text-[11px]">
+              <i class="fa-solid fa-trash"></i>
+            </button>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function openEditModal(id) {
+      const p = products.find(item => item.id === id);
+      if (!p) return;
+      document.getElementById('editProdId').value = p.id;
+      document.getElementById('editTitle').value = p.title;
+      document.getElementById('editCategory').value = p.cat;
+      document.getElementById('editGender').value = p.gender;
+      document.getElementById('editRetail').value = p.retailPrice;
+      document.getElementById('editWholesale').value = p.wholesalePrice;
+      document.getElementById('editMinQty').value = p.bulkMinQty;
+      document.getElementById('editDesc').value = p.desc;
+      document.getElementById('editPhotoPreview').src = p.image;
+      document.getElementById('editPhotoUrl').value = p.image;
+      document.getElementById('editPhotoFileInput').value = "";
+      document.getElementById('editProductModal').classList.remove('hidden');
+    }
+
+    function closeEditModal() {
+      document.getElementById('editProductModal').classList.add('hidden');
+    }
+
+    function saveProductEdit() {
+      const id = parseInt(document.getElementById('editProdId').value);
+      const p = products.find(item => item.id === id);
+      if (!p) return;
+      p.title = document.getElementById('editTitle').value;
+      p.cat = document.getElementById('editCategory').value;
+      p.gender = document.getElementById('editGender').value;
+      p.retailPrice = parseFloat(document.getElementById('editRetail').value) || p.retailPrice;
+      p.wholesalePrice = parseFloat(document.getElementById('editWholesale').value) || p.wholesalePrice;
+      p.bulkMinQty = parseInt(document.getElementById('editMinQty').value) || p.bulkMinQty;
+      p.desc = document.getElementById('editDesc').value;
+      const newImg = document.getElementById('editPhotoUrl').value;
+      if (newImg) p.image = newImg;
+
+      alert("Product details & photo successfully update ho gayi!");
+      closeEditModal();
+      renderAdminTable();
+      renderCatalog();
+    }
+
+    function deleteProduct(id) {
+      if (!confirm("Kya aap sach me is toy ko catalog se delete karna chahte hain?")) return;
+      products = products.filter(p => p.id !== id);
+      cart = cart.filter(c => c.id !== id);
+      updateCartBadge();
+      renderAdminTable();
+      renderCatalog();
+    }
+
+    let aiDraft = null;
+    function runAiListing() {
+      const type = document.getElementById('aiToyType').value;
+      const price = parseFloat(document.getElementById('aiPrice').value) || 600;
+      const box = document.getElementById('aiPreviewBox');
+
+      box.innerHTML = `<div class="py-6 text-indigo-700 font-bold"><i class="fa-solid fa-spinner fa-spin text-2xl"></i><p class="mt-2 text-xs">AI scanning photo & calculating wholesale slabs...</p></div>`;
+
+      setTimeout(() => {
+        const wholesale = Math.round(price * 0.65);
+        let sample = { title: "4x4 Extreme RC Rock Crawler", cat: "Racing", gender: "Boys", age: "6-8", desc: "Full function radio transmitter, 4WD climbing suspension." };
+        if (type === 'gel_blaster') sample = { title: "Tactical Sniper Soft Gel Blaster", cat: "Guns", gender: "Boys", age: "9+", desc: "Dual scope with eco gel bead magazine." };
+        if (type === 'doll_house') sample = { title: "Musical Doll Villa Pretend Set", cat: "Dolls", gender: "Girls", age: "3-5", desc: "Interactive sounds and light up miniature doll rooms." };
+        if (type === 'drone_heli') sample = { title: "Gesture Sensor Altitude Helicopter", cat: "Flying", gender: "Unisex", age: "6-8", desc: "Smart obstacle avoidance sensor and USB charging." };
+
+        aiDraft = { 
+          id: Date.now(), 
+          title: sample.title, 
+          cat: sample.cat, 
+          gender: sample.gender, 
+          age: sample.age, 
+          retailPrice: price, 
+          wholesalePrice: wholesale, 
+          bulkMinQty: 10, 
+          desc: sample.desc, 
+          image: currentUploadedAiImage 
+        };
+
+        box.innerHTML = `
+          <div class="text-left space-y-3 text-xs">
+            <div class="flex items-center gap-2 text-emerald-600 font-bold"><i class="fa-solid fa-circle-check"></i> AI Listing Ready</div>
+            <div class="flex gap-3 items-center">
+              <img src="${aiDraft.image}" class="w-16 h-16 rounded-xl object-cover border shadow-sm">
+              <div class="flex-grow">
+                <label class="block text-[10px] font-bold text-slate-500">Auto Title</label>
+                <input id="dTitle" value="${aiDraft.title}" class="w-full border p-1.5 rounded-xl font-bold">
+              </div>
+            </div>
+            <div class="grid grid-cols-3 gap-2">
+              <div><strong>Category:</strong> ${sample.cat}</div>
+              <div><strong>Gender:</strong> ${sample.gender}</div>
+              <div><strong>Age:</strong> ${sample.age} Yrs</div>
+            </div>
+            <div class="bg-amber-50 p-2 rounded-xl border border-amber-200">
+              <strong>Wholesale Slabs:</strong> 10+ Pieces @ ₹${wholesale}/pc (Retail: ₹${price})
+            </div>
+            <button onclick="publishAi()" class="w-full bg-emerald-600 text-white font-bold py-2 rounded-xl mt-2 font-toy">Publish Product to Catalog</button>
+          </div>
+        `;
+      }, 600);
+    }
+
+    function publishAi() {
+      if (!aiDraft) return;
+      aiDraft.title = document.getElementById('dTitle').value;
+      products.unshift(aiDraft);
+      alert("Naya toy uploaded photo ke sath catalog me jud gaya!");
+      aiDraft = null;
+      document.getElementById('aiPreviewBox').innerHTML = 'Product added! Agla product add karein.';
+      switchAdminTab('manage');
+    }
+
+    function setFilter(type, value) {
+      currentFilters[type] = value;
+      if (type === 'gender') {
+        document.querySelectorAll('.filter-btn-gender').forEach(b => {
+          b.className = b.dataset.val === value ? "filter-btn-gender px-2 py-1 rounded-lg border font-bold bg-rose-500 text-white" : "filter-btn-gender px-2 py-1 rounded-lg border font-bold bg-slate-50 text-slate-700";
+        });
+      }
+      renderCatalog();
+    }
+
+    function resetFilters() {
+      currentFilters = { gender: 'All', cat: 'All', age: 'All' };
+      document.querySelectorAll('.filter-btn-gender').forEach(b => {
+        b.className = b.dataset.val === 'All' ? "filter-btn-gender px-2 py-1 rounded-lg border font-bold bg-rose-500 text-white" : "filter-btn-gender px-2 py-1 rounded-lg border font-bold bg-slate-50 text-slate-700";
+      });
+      document.querySelector('input[name="catFilter"][value="All"]').checked = true;
+      renderCatalog();
+    }
+
+    function renderCatalog() {
+      const filtered = products.filter(p => {
+        const matchesGender = currentFilters.gender === 'All' || p.gender === currentFilters.gender || p.gender === 'Unisex';
+        const matchesCat = currentFilters.cat === 'All' || p.cat === currentFilters.cat;
+        return matchesGender && matchesCat;
+      });
+
+      document.getElementById('productCountBadge').innerText = filtered.length;
+      const grid = document.getElementById('catalogGrid');
+      const noFound = document.getElementById('noProductsFound');
+
+      if (filtered.length === 0) {
+        grid.innerHTML = '';
+        noFound.classList.remove('hidden');
+        return;
+      }
+
+      noFound.classList.add('hidden');
+      grid.innerHTML = filtered.map(p => productCardHtml(p)).join('');
+    }
+
+    function renderHome() {
+      document.getElementById('homeFeaturedGrid').innerHTML = products.slice(0, 4).map(p => productCardHtml(p)).join('');
+    }
+
+    function productCardHtml(p) {
+      return `
+        <div class="bg-white rounded-3xl border border-slate-100 shadow-sm overflow-hidden flex flex-col justify-between card-hover toy-shadow">
+          <div class="relative overflow-hidden">
+            <img src="${p.image}" class="h-44 w-full object-cover">
+            <span class="absolute top-2.5 left-2.5 bg-white/90 backdrop-blur-md text-slate-800 text-[10px] font-black px-2 py-0.5 rounded-full shadow-sm">
+              ${p.cat} • ${p.gender}
+            </span>
+            <span class="absolute top-2.5 right-2.5 bg-amber-300 text-slate-950 text-[10px] font-black px-2 py-0.5 rounded-full shadow-sm">
+              ${p.age} Yrs
+            </span>
+          </div>
+
+          <div class="p-4 space-y-3 flex-grow flex flex-col justify-between">
+            <div>
+              <h4 class="font-toy text-sm font-black text-slate-900 leading-snug">${p.title}</h4>
+              <p class="text-[11px] text-slate-400 mt-1 line-clamp-2">${p.desc}</p>
+              <div class="mt-1.5 flex items-center gap-1 text-[10px] text-red-600 font-extrabold">
+                <i class="fa-solid fa-ban"></i> No Return • No Exchange
+              </div>
+            </div>
+
+            <div class="bg-gradient-to-r from-amber-50 to-rose-50 p-2.5 rounded-2xl border border-amber-200/60 space-y-1">
+              <div class="flex justify-between items-center text-xs">
+                <span class="text-slate-500 font-semibold">Single Piece:</span>
+                <span class="font-extrabold text-slate-900">₹${p.retailPrice}</span>
+              </div>
+              <div class="flex justify-between items-center text-xs font-bold text-rose-700 bg-white/80 px-2 py-0.5 rounded-xl">
+                <span>Wholesale (${p.bulkMinQty}+ pcs):</span>
+                <span class="text-emerald-600 font-extrabold">₹${p.wholesalePrice}/pc</span>
+              </div>
+            </div>
+
+            <button onclick="addToCart(${p.id})" class="w-full bg-slate-900 hover:bg-rose-600 text-white text-xs font-black py-2.5 rounded-xl transition-all shadow font-toy flex items-center justify-center gap-1.5">
+              <i class="fa-solid fa-cart-plus text-amber-300"></i> Add to Cart
+            </button>
+          </div>
+        </div>
+      `;
+    }
+
+    function addToCart(id) {
+      const item = cart.find(i => i.id === id);
+      if (item) item.qty += 1;
+      else cart.push({ id, qty: 1 });
+      updateCartBadge();
+      alert("Product Cart me add ho gaya!");
+    }
+
+    function updateCartBadge() {
+      document.getElementById('cartCount').innerText = cart.reduce((a, b) => a + b.qty, 0);
+    }
+
+    function changeQty(id, delta) {
+      const item = cart.find(i => i.id === id);
+      if (item) {
+        item.qty += delta;
+        if (item.qty <= 0) cart = cart.filter(i => i.id !== id);
+      }
+      renderCart();
+      updateCartBadge();
+    }
+
+    function renderCart() {
+      const container = document.getElementById('cartItemsList');
+      const empty = document.getElementById('emptyCartNotice');
+      if (cart.length === 0) {
+        container.innerHTML = '';
+        empty.classList.remove('hidden');
+        calculateCart();
+        return;
+      }
+      empty.classList.add('hidden');
+
+      container.innerHTML = cart.map(item => {
+        const prod = products.find(p => p.id === item.id);
+        const isBulk = item.qty >= prod.bulkMinQty;
+        const rate = isBulk ? prod.wholesalePrice : prod.retailPrice;
+
+        return `
+          <div class="flex items-center justify-between border-b pb-3 gap-3">
+            <img src="${prod.image}" class="w-14 h-14 rounded-xl object-cover">
+            <div class="flex-grow">
+              <h5 class="font-toy text-xs font-bold text-slate-800">${prod.title}</h5>
+              <div class="text-[11px] ${isBulk ? 'text-emerald-600 font-bold' : 'text-slate-400'}">
+                ₹${rate}/pc ${isBulk ? '(Wholesale Slab Applied)' : '(Retail Rate)'}
+              </div>
+              <div class="text-[10px] text-red-500 font-bold">Non-Returnable</div>
+            </div>
+            <div class="flex items-center gap-1.5 bg-slate-100 p-1 rounded-xl">
+              <button onclick="changeQty(${prod.id}, -1)" class="w-6 h-6 bg-white rounded font-bold text-xs">-</button>
+              <span class="font-bold text-xs w-5 text-center">${item.qty}</span>
+              <button onclick="changeQty(${prod.id}, 1)" class="w-6 h-6 bg-white rounded font-bold text-xs">+</button>
+            </div>
+            <div class="font-toy font-black text-xs text-slate-900 w-16 text-right">
+              ₹${rate * item.qty}
+            </div>
+          </div>
+        `;
+      }).join('');
+      calculateCart();
+    }
+
+    function calculateCart() {
+      let subtotal = 0, savings = 0, totalQty = 0;
+      cart.forEach(item => {
+        const prod = products.find(p => p.id === item.id);
+        const isBulk = item.qty >= prod.bulkMinQty;
+        const rate = isBulk ? prod.wholesalePrice : prod.retailPrice;
+        subtotal += rate * item.qty;
+        if (isBulk) savings += (prod.retailPrice - prod.wholesalePrice) * item.qty;
+        totalQty += item.qty;
+      });
+
+      const type = document.getElementById('shippingType').value;
+      let shipCost = 0;
+      if (totalQty > 0) {
+        if (type === 'courier') shipCost = 70;
+        else if (type === 'transport') shipCost = 250;
+        else shipCost = 0;
+      }
+
+      document.getElementById('summarySubtotal').innerText = `₹${subtotal + savings}`;
+      document.getElementById('summaryDiscount').innerText = `-₹${savings}`;
+      document.getElementById('summaryShipping').innerText = `₹${shipCost}`;
+      document.getElementById('summaryTotal').innerText = `₹${subtotal + shipCost}`;
+    }
+
+    function placeOrder() {
+      if (cart.length === 0) return alert("Cart khali hai!");
+      alert("Order Placed! Vijay Toys Center (Helpline: 8898001022 - Ashok Kumar Navaram Prajapat) se order verify karke bilti transport booking details WhatsApp par bhej di jayegi. (Note: Policy - No Return/No Exchange)");
+      cart = [];
+      updateCartBadge();
+      navigate('home');
+    }
+
+    renderHome();
+    applyRoleUi();
+  </script>
+</body>
+</html>
